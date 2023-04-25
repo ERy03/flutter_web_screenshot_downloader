@@ -73,14 +73,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             ElevatedButton(
-                onPressed: () async {
-                  screenshotController.capture().then((value) async {
+                onPressed: () {
+                  screenshotController.capture().then((value) {
                     final base64Code = base64Encode(value!);
                     AnchorElement(
                         href:
                             'data:application/octet-stream;base64,$base64Code')
                       ..setAttribute('download', 'screenshot.png')
                       ..click();
+                  }).catchError((onError) {
+                    debugPrint(onError);
                   });
                 },
                 child: const Text('capture')),
