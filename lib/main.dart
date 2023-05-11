@@ -1,8 +1,8 @@
-import 'dart:convert';
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -72,18 +72,37 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       screenshotController.capture().then((value) {
+            //         final base64Code = base64Encode(value!);
+            //         AnchorElement(href: 'data:image/png;base64,$base64Code')
+            //           ..setAttribute('download', 'screenshot.png')
+            //           ..click();
+            //       }).catchError((onError) {
+            //         debugPrint(onError);
+            //       });
+            //     },
+            //     child: const Text('download')),
             ElevatedButton(
                 onPressed: () {
                   screenshotController.capture().then((value) {
-                    final base64Code = base64Encode(value!);
-                    AnchorElement(href: 'data:image/png;base64,$base64Code')
-                      ..setAttribute('download', 'screenshot.png')
-                      ..click();
+                    Share.shareXFiles([
+                      XFile.fromData(value!,
+                          mimeType: 'image/png', name: 'screenshot.png'),
+                    ]);
                   }).catchError((onError) {
                     debugPrint(onError);
                   });
                 },
-                child: const Text('download')),
+                child: const Text('share')),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Share.share('check out my website https://google.com');
+              },
+              child: const Text('share link'),
+            )
           ],
         ),
       ),
