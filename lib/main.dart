@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:universal_html/html.dart' as html;
 
 void main() {
   runApp(const MyApp());
@@ -72,6 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            // Downloading
+
             // ElevatedButton(
             //     onPressed: () {
             //       screenshotController.capture().then((value) {
@@ -84,13 +87,37 @@ class _MyHomePageState extends State<MyHomePage> {
             //       });
             //     },
             //     child: const Text('download')),
+
+            // Sharing
+            // ElevatedButton(
+            //     onPressed: () {
+            //       screenshotController.capture().then((value) {
+            //         Share.shareXFiles([
+            //           XFile.fromData(value!,
+            //               mimeType: 'image/png', name: 'screenshot.png'),
+            //         ]);
+            //       }).catchError((onError) {
+            //         debugPrint(onError);
+            //       });
+            //     },
+            //     child: const Text('share')),
+
+            // Sharing with html
             ElevatedButton(
                 onPressed: () {
-                  screenshotController.capture().then((value) {
-                    Share.shareXFiles([
-                      XFile.fromData(value!,
-                          mimeType: 'image/png', name: 'screenshot.png'),
-                    ]);
+                  screenshotController.capture().then((value) async {
+                    try {
+                      await html.window.navigator.share({
+                        'files': [
+                          html.File([
+                            html.File(
+                                [value!], 'image/png', {'type': 'image/png'})
+                          ], 'screenshot.png')
+                        ]
+                      });
+                    } catch (e) {
+                      debugPrint(e.toString());
+                    }
                   }).catchError((onError) {
                     debugPrint(onError);
                   });
