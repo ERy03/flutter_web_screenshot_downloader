@@ -1,9 +1,12 @@
 // import 'dart:html';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:universal_html/html.dart' as html;
+import 'package:universal_html/html.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,33 +78,33 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             // Downloading
 
-            // ElevatedButton(
-            //     onPressed: () {
-            //       screenshotController.capture().then((value) {
-            //         final base64Code = base64Encode(value!);
-            //         AnchorElement(href: 'data:image/png;base64,$base64Code')
-            //           ..setAttribute('download', 'screenshot.png')
-            //           ..click();
-            //       }).catchError((onError) {
-            //         debugPrint(onError);
-            //       });
-            //     },
-            //     child: const Text('download')),
-
-            // Sharing
-            // ElevatedButton(
-            //     onPressed: () {
-            //       screenshotController.capture().then((value) {
-            //         Share.shareXFiles([
-            //           XFile.fromData(value!,
-            //               mimeType: 'image/png', name: 'screenshot.png'),
-            //         ]);
-            //       }).catchError((onError) {
-            //         debugPrint(onError);
-            //       });
-            //     },
-            //     child: const Text('share')),
-
+            ElevatedButton(
+                onPressed: () {
+                  screenshotController.capture().then((value) {
+                    final base64Code = base64Encode(value!);
+                    AnchorElement(href: 'data:image/png;base64,$base64Code')
+                      ..setAttribute('download', 'screenshot.png')
+                      ..click();
+                  }).catchError((onError) {
+                    debugPrint(onError);
+                  });
+                },
+                child: const Text('download')),
+            const SizedBox(height: 10),
+            // Sharing with share plus
+            ElevatedButton(
+                onPressed: () {
+                  screenshotController.capture().then((value) async {
+                    await Share.shareXFiles([
+                      XFile.fromData(value!,
+                          mimeType: 'image/png', name: 'screenshot.png'),
+                    ]);
+                  }).catchError((onError) {
+                    debugPrint(onError);
+                  });
+                },
+                child: const Text('share with shareplus')),
+            const SizedBox(height: 10),
             // Sharing with html
             ElevatedButton(
                 onPressed: () {
@@ -109,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     try {
                       await html.window.navigator.share({
                         'files': [
-                          html.File([
+                          html.Blob([
                             html.File(
                                 [value!], 'image/png', {'type': 'image/png'})
                           ], 'screenshot.png')
@@ -122,7 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     debugPrint(onError);
                   });
                 },
-                child: const Text('share')),
+                child: const Text('share with html')),
+
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
