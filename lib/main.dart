@@ -1,12 +1,17 @@
 // import 'dart:html';
+@JS()
+library imgdownload;
 
-import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:js/js.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:universal_html/html.dart' as html;
-import 'package:universal_html/html.dart';
+
+@JS('save')
+external void save(String fileName, Uint8List data);
 
 void main() {
   runApp(const MyApp());
@@ -81,10 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: () {
                   screenshotController.capture().then((value) {
-                    final base64Code = base64Encode(value!);
-                    AnchorElement(href: 'data:image/png;base64,$base64Code')
-                      ..setAttribute('download', 'screenshot.png')
-                      ..click();
+                    // final base64Code = base64Encode(value!);
+                    // AnchorElement(href: 'data:image/png;base64,$base64Code')
+                    //   ..setAttribute('download', 'screenshot.png')
+                    //   ..click();
+                    debugPrint(value.toString());
+                    save('screenshot.png', value!);
                   }).catchError((onError) {
                     debugPrint(onError);
                   });
