@@ -1,13 +1,10 @@
 function save(filename, data) {
-  const blob = new Blob([data], { type: "image/png" });
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveBlob(blob, filename);
-  } else {
+  const blob = new Blob([data], { type: "application/octet-stream" });
     const elem = window.document.createElement("a");
     elem.href = window.URL.createObjectURL(blob);
     elem.download = filename;
     document.body.appendChild(elem);
-    elem.click();
+    const evt = new Event("click", { bubbles: true, cancelable: false});
+    elem.dispatchEvent(evt);
     document.body.removeChild(elem);
-  }
 }

@@ -90,7 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     // AnchorElement(href: 'data:image/png;base64,$base64Code')
                     //   ..setAttribute('download', 'screenshot.png')
                     //   ..click();
-                    debugPrint(value.toString());
                     save('screenshot.png', value!);
                   }).catchError((onError) {
                     debugPrint(onError);
