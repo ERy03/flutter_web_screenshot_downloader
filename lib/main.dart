@@ -2,6 +2,8 @@
 @JS()
 library imgdownload;
 
+import 'dart:convert';
+import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -82,20 +84,103 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             // Downloading
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Tooltip(
+                  message: 'using anchor element',
+                  child: ElevatedButton(
+                      onPressed: () {
+                        screenshotController.capture().then((value) {
+                          final base64Code = base64Encode(value!);
+                          AnchorElement(
+                              href: 'data:image/png;base64,$base64Code')
+                            ..setAttribute('download', 'screenshot.png')
+                            ..click();
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:1')),
+                ),
+                const SizedBox(width: 10),
+                Tooltip(
+                  message: 'using js save function',
+                  child: ElevatedButton(
+                      onPressed: () {
+                        screenshotController.capture().then((value) {
+                          save('screenshot.png', value!);
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:2')),
+                ),
+                const SizedBox(width: 10),
+                Tooltip(
+                  message: 'using data:application/octet-stream;base64',
+                  child: ElevatedButton(
+                      onPressed: () {
+                        screenshotController.capture().then((value) {
+                          final base64Code = base64Encode(value!);
+                          final anchor = AnchorElement(
+                              href:
+                                  'data:application/octet-stream;base64,$base64Code')
+                            ..target = 'blank'
+                            ..download = 'screenshot.png';
+                          document.body!.append(anchor);
+                          anchor.click();
+                          anchor.remove();
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:3')),
+                ),
+                const SizedBox(width: 10),
+                Tooltip(
+                  message: 'using rawData',
+                  child: ElevatedButton(
+                      onPressed: () {
+                        screenshotController.capture().then((value) {
+                          final rawData = value!.buffer.asUint8List();
+                          final content = base64Encode(rawData);
+                          AnchorElement(
+                              href:
+                                  "data:application/octet-stream;charset=utf-16le;base64,$content")
+                            ..setAttribute("download", "file.txt")
+                            ..click();
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:4')),
+                ),
+                const SizedBox(width: 10),
+                Tooltip(
+                  message: 'using blob with url',
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        screenshotController.capture().then((value) async {
+                          final blob = html.Blob([value!], 'image/png');
+                          final url =
+                              await html.Url.createObjectUrlFromBlob(blob);
+                          final a = html.AnchorElement();
+                          a.href = url;
+                          a.download = 'screenshot.png';
+                          html.document.body!.append(a);
+                          a.click();
+                          await Future.delayed(const Duration(seconds: 1));
+                          html.Url.revokeObjectUrl(url);
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:5')),
+                ),
+              ],
+            ),
 
-            ElevatedButton(
-                onPressed: () {
-                  screenshotController.capture().then((value) {
-                    // final base64Code = base64Encode(value!);
-                    // AnchorElement(href: 'data:image/png;base64,$base64Code')
-                    //   ..setAttribute('download', 'screenshot.png')
-                    //   ..click();
-                    save('screenshot.png', value!);
-                  }).catchError((onError) {
-                    debugPrint(onError);
-                  });
-                },
-                child: const Text('download')),
             const SizedBox(height: 10),
             // Sharing with share plus
             ElevatedButton(

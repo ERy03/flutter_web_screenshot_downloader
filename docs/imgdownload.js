@@ -1,10 +1,24 @@
 function save(filename, data) {
-  const blob = new Blob([data], { type: "application/octet-stream" });
+  const blob = new Blob([data], { type: "image/png" });
+  console.log(blob);
     const elem = window.document.createElement("a");
+    console.log(elem);
     elem.href = window.URL.createObjectURL(blob);
+    console.log(elem.href);
     elem.download = filename;
     document.body.appendChild(elem);
-    const evt = new Event("click", { bubbles: true, cancelable: false});
-    elem.dispatchEvent(evt);
+    elem.click();
+    document.body.removeChild(elem);
+}
+function saveTouchEnd(filename, data) {
+  const blob = new Blob([data], { type: "image/png" });
+  console.log(blob);
+    const elem = window.document.createElement("a");
+    console.log(elem);
+    elem.href = window.URL.createObjectURL(blob);
+    console.log(elem.href);
+    elem.download = filename;
+    document.body.appendChild(elem);
+    elem.click();
     document.body.removeChild(elem);
 }
