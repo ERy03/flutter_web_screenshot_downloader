@@ -22,3 +22,13 @@ function saveTouchEnd(filename, data) {
     elem.click();
     document.body.removeChild(elem);
 }
+
+// using filesaver.js
+function downloadImage(uint8Array) {
+  var blob = new Blob([uint8Array], {type: "image/png"});
+  saveAs(blob, 'screenshot.png');
+}
+function downloadImageAsFile(uint8Array) {
+  var file = new File([uint8Array], {type: "image/png"});
+  saveAs(file, "screenshot.png");
+}

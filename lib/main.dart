@@ -15,6 +15,12 @@ import 'package:universal_html/html.dart' as html;
 @JS('save')
 external void save(String fileName, Uint8List data);
 
+@JS('downloadImage')
+external void downloadImage(uint8Array);
+
+@JS('downloadImageAsFile')
+external void downloadImageAsFile(uint8Array);
+
 void main() {
   runApp(const MyApp());
 }
@@ -156,7 +162,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: const Text('download:4')),
                 ),
-                const SizedBox(width: 10),
+              ],
+            ),
+
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Tooltip(
                   message: 'using blob with url',
                   child: ElevatedButton(
@@ -178,9 +190,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: const Text('download:5')),
                 ),
+                const SizedBox(width: 10),
+                Tooltip(
+                  message: 'using file save js package',
+                  child: ElevatedButton(
+                      onPressed: () {
+                        screenshotController.capture().then((value) {
+                          downloadImage(value!);
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:6')),
+                ),
+                const SizedBox(width: 10),
+                Tooltip(
+                  message: 'using file save js package downloadImageAsFile',
+                  child: ElevatedButton(
+                      onPressed: () {
+                        screenshotController.capture().then((value) {
+                          downloadImageAsFile(value!);
+                        }).catchError((onError) {
+                          debugPrint(onError);
+                        });
+                      },
+                      child: const Text('download:7')),
+                ),
               ],
             ),
-
             const SizedBox(height: 10),
             // Sharing with share plus
             ElevatedButton(
