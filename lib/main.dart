@@ -82,6 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text(
                     'You have pushed the button this many times:',
                   ),
+                  const Text(
+                    '文字化けせんか心配です。、どれるをわをん「」',
+                  ),
                   Text(
                     '$_counter',
                     style: Theme.of(context).textTheme.headlineMedium,
@@ -94,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Tooltip(
-                  message: 'using anchor element',
+                  message: 'using anchor element 日本語で',
                   child: ElevatedButton(
                       onPressed: () {
                         screenshotController.capture().then((value) {
