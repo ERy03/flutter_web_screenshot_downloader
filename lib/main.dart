@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:js/js.dart';
 import 'package:screenshot/screenshot.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Noto Sans JP',
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -74,11 +76,33 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Image(
-                    image: AssetImage(
-                        'assets/images/james-barker-v3-zcCWMjgM-unsplash.jpg'),
-                    height: 250,
+                  CachedNetworkImage(
+                    imageUrl:
+                        'https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+                    imageBuilder: (context, imageProvider) => Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                      color: Colors.deepOrangeAccent,
+                    ),
                   ),
+                  // const Image(
+                  //   image: AssetImage(
+                  //       'assets/images/james-barker-v3-zcCWMjgM-unsplash.jpg'),
+                  //   height: 250,
+                  // ),
                   const Text(
                     'You have pushed the button this many times:',
                   ),
