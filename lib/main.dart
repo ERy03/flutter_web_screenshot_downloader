@@ -14,7 +14,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:universal_html/html.dart' as html;
 
 @JS('save')
-external void save(String fileName, Uint8List data);
+external void save(Uint8List data);
 
 @JS('downloadImage')
 external void downloadImage(uint8Array);
@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
                         screenshotController.capture().then((value) {
                           final base64Code = base64Encode(value!);
-                          AnchorElement(
+                          html.AnchorElement(
                               href: 'data:image/png;base64,$base64Code')
                             ..setAttribute('download', 'screenshot.png')
                             ..click();
@@ -142,12 +142,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ElevatedButton(
                       onPressed: () {
                         screenshotController.capture().then((value) {
-                          save('screenshot.png', value!);
+                          save(value!);
                         }).catchError((onError) {
                           debugPrint(onError);
                         });
                       },
-                      child: const Text('download:2')),
+                      child: const Text('This! download')),
                 ),
                 const SizedBox(width: 10),
                 Tooltip(

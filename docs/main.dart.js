@@ -49181,7 +49181,7 @@ L(a){var s,r,q=this,p=null,o="https://images.unsplash.com/photo-1543466835-00a79
 q.a.toString
 s=A.abQ("Flutter Demo Home Page",p,p,p)
 r=t.F
-return new A.rr(new A.on(s,new A.GK(p,p,1/0,56),p),A.Lj(A.a9U(A.a([new A.mO(A.a9U(A.a([new A.oB(new A.is(p,o,p,p,p,p,B.wT),o,new A.a23(),new A.a24(),new A.a25(),p),B.Hn,B.Hy,A.abQ(""+q.d,A.b5(a).p3.e,p,p)],r),B.cz),q.e,p,t.pV),A.a7B(A.a([A.j8(A.hw(B.Hr,new A.a28(q)),"using anchor element \u65e5\u672c\u8a9e\u3067"),B.bW,A.j8(A.hw(B.Hs,new A.a29(q)),"using js save function"),B.bW,A.j8(A.hw(B.Ht,new A.a2a(q)),"using data:application/octet-stream;base64"),B.bW,A.j8(A.hw(B.Hu,new A.a2b(q)),"using rawData")],r),B.cb,B.cz,B.cA),B.ih,A.a7B(A.a([A.j8(A.hw(B.Hv,new A.a2c(q)),"using blob with url"),B.bW,A.j8(A.hw(B.Hw,new A.a2d(q)),"using file save js package"),B.bW,A.j8(A.hw(B.Hx,new A.a2e(q)),"using file save js package downloadImageAsFile")],r),B.cb,B.cz,B.cA),B.ih,A.hw(B.Hp,new A.a2f(q)),B.ih,A.hw(B.Ho,new A.a26(q)),B.DF,A.hw(B.Hq,new A.a27())],r),B.cz),p,p),A.aaj(B.wK,!1,q.gLY(),"Increment"),p)}}
+return new A.rr(new A.on(s,new A.GK(p,p,1/0,56),p),A.Lj(A.a9U(A.a([new A.mO(A.a9U(A.a([new A.oB(new A.is(p,o,p,p,p,p,B.wT),o,new A.a23(),new A.a24(),new A.a25(),p),B.Hn,B.Hy,A.abQ(""+q.d,A.b5(a).p3.e,p,p)],r),B.cz),q.e,p,t.pV),A.a7B(A.a([A.j8(A.hw(B.Hs,new A.a28(q)),"using anchor element \u65e5\u672c\u8a9e\u3067"),B.bW,A.j8(A.hw(B.Hr,new A.a29(q)),"using js save function"),B.bW,A.j8(A.hw(B.Ht,new A.a2a(q)),"using data:application/octet-stream;base64"),B.bW,A.j8(A.hw(B.Hu,new A.a2b(q)),"using rawData")],r),B.cb,B.cz,B.cA),B.ih,A.a7B(A.a([A.j8(A.hw(B.Hv,new A.a2c(q)),"using blob with url"),B.bW,A.j8(A.hw(B.Hw,new A.a2d(q)),"using file save js package"),B.bW,A.j8(A.hw(B.Hx,new A.a2e(q)),"using file save js package downloadImageAsFile")],r),B.cb,B.cz,B.cA),B.ih,A.hw(B.Hp,new A.a2f(q)),B.ih,A.hw(B.Ho,new A.a26(q)),B.DF,A.hw(B.Hq,new A.a27())],r),B.cz),p,p),A.aaj(B.wK,!1,q.gLY(),"Increment"),p)}}
 A.a1L.prototype={
 $0(){++this.a.d},
 $S:0}
@@ -49213,7 +49213,7 @@ $0(){this.a.e.fw(0).a7(new A.a1S(),t.P).cM(new A.a1T())},
 $S:0}
 A.a1S.prototype={
 $1(a){a.toString
-self.save("screenshot.png",a)},
+self.save(a)},
 $S:28}
 A.a1T.prototype={
 $1(a){A.eD().$1(a)},
@@ -54198,8 +54198,8 @@ B.Hn=new A.cY("You have pushed the button this many times:",null,null,null,null,
 B.Ho=new A.cY("share with html",null,null,null,null,null)
 B.Hp=new A.cY("share with shareplus",null,null,null,null,null)
 B.Hq=new A.cY("share link",null,null,null,null,null)
-B.Hr=new A.cY("download:1",null,null,null,null,null)
-B.Hs=new A.cY("download:2",null,null,null,null,null)
+B.Hr=new A.cY("This! download",null,null,null,null,null)
+B.Hs=new A.cY("download:1",null,null,null,null,null)
 B.Ht=new A.cY("download:3",null,null,null,null,null)
 B.Hu=new A.cY("download:4",null,null,null,null,null)
 B.Hv=new A.cY("download:5",null,null,null,null,null)
